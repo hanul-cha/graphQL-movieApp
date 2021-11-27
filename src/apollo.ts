@@ -6,4 +6,3 @@ const client = new ApolloClient({
 })
 
 export default client
-//graphQL로 서버 만들고 이어서 하쟈...
