@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/client';
+import styled from 'styled-components';
 
 const Detail = () => {
 
@@ -9,7 +10,8 @@ const Detail = () => {
     const GET_MOVIE = gql`
         query getMovie($id :Int!){
             movie(id: $id){
-                id,
+                rating,
+                language,
                 title,
                 medium_cover_image,
                 description_intro
@@ -26,11 +28,16 @@ const Detail = () => {
         }
     })
 
+    
+
     console.log(loading, data, id)
 
 
     return (
-        <div><h2>Detail</h2></div>
+        <div>
+        {loading && "Loading"}
+        {!loading && data.movie && data.movie.title}
+        </div>
     )
 }
 
