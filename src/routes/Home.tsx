@@ -2,6 +2,8 @@ import React from 'react';
 import { gql } from "apollo-boost";
 import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
+import { MoviesTypeProp } from './HomeType';
+import Movie from 'components/Movie';
 
 
 const GET_MOVIES = gql`
@@ -57,12 +59,6 @@ const Movies = styled.div`
     top: -50px;
 `;
 
-interface moviesType {
-    id :any
-    medium_cover_image? :string
-    __typename? :string
-}
-
 const Home = () => {
     const { loading, data } = useQuery(GET_MOVIES);
     /* console.log(data.movies) */
@@ -73,7 +69,7 @@ const Home = () => {
                 <Subtitle>Use Graphql</Subtitle>
             </Header>
             {loading && <Loading>Loading</Loading>}
-            {!loading && data.movies && data.movies.map((m :moviesType) => console.log(m))}
+            {!loading && data.movies && data.movies.map((m :MoviesTypeProp) => <Movie key={m.id} id={m.id} />)}
         </Container>
     )
 
